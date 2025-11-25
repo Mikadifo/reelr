@@ -1,8 +1,10 @@
+import RegisterForm from "@components/RegisterForm";
+
 function RegisterPage() {
   return (
-    <div>
-      <p>Body</p>
-    </div>
+    <section className="h-screen flex items-center justify-center">
+      <RegisterForm />
+    </section>
   );
 }
 

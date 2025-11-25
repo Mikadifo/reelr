@@ -1,8 +1,10 @@
+import LoginForm from "@components/LoginForm";
+
 function LoginPage() {
   return (
-    <div>
-      <p>Login</p>
-    </div>
+    <section className="h-screen flex items-center justify-center">
+      <LoginForm />
+    </section>
   );
 }
 
