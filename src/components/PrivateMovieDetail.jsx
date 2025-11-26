@@ -7,13 +7,21 @@ import Add from "@assets/icons/add.svg?react";
 import Remove from "@assets/icons/cross.svg?react";
 import MovieDetailHeader from "./MovieDetailHeader";
 import { useRef } from "react";
+import DeleteMovieDialog from "./DeleteMovieDialog";
 
 function PrivateMovieDetail({ movie, setMovie }) {
-  const dialogRef = useRef(null);
+  const formDialogRef = useRef(null);
+  const deleteDialogRef = useRef(null);
 
-  const openDialog = () => {
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
+  const openFormDialog = () => {
+    if (formDialogRef.current) {
+      formDialogRef.current.showModal();
+    }
+  };
+
+  const openDeleteDialog = () => {
+    if (deleteDialogRef.current) {
+      deleteDialogRef.current.showModal();
     }
   };
 
@@ -69,7 +77,7 @@ function PrivateMovieDetail({ movie, setMovie }) {
         <div className="flex gap-4">
           <Button
             className="bg-cyan! flex gap-2 size-fit text-white"
-            onClick={openDialog}
+            onClick={openFormDialog}
           >
             Edit
             <Edit className="size-[22px]" />
@@ -78,7 +86,10 @@ function PrivateMovieDetail({ movie, setMovie }) {
             Share
             <Share className="size-[22px]" />
           </Button>
-          <Button className="bg-red! flex gap-2 size-fit text-white">
+          <Button
+            className="bg-red! flex gap-2 size-fit text-white"
+            onClick={openDeleteDialog}
+          >
             Delete
             <Delete className="size-[22px]" />
           </Button>
@@ -86,11 +97,12 @@ function PrivateMovieDetail({ movie, setMovie }) {
       </div>
 
       <FormMovieDialog
-        dialogRef={dialogRef}
+        dialogRef={formDialogRef}
         {...movie}
         setMovie={setMovie}
         isPublic={movie.public}
       />
+      <DeleteMovieDialog dialogRef={deleteDialogRef} {...movie} />
     </section>
   );
 }
