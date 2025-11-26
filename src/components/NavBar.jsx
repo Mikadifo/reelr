@@ -1,10 +1,12 @@
 import Logo from "@assets/logo.svg?react";
-import Button from "./Button";
+import Home from "@assets/icons/home.svg?react";
+import Logout from "@assets/icons/logout.svg?react";
+import Button from "@components/Button";
 
 function NavBar() {
   const user = localStorage.getItem("token");
 
-  const handleActionButtonClick = () => {
+  const logout = () => {
     localStorage.removeItem("token");
   };
 
@@ -17,9 +19,25 @@ function NavBar() {
         </span>
       </div>
 
-      <Button link to="/login" onClick={handleActionButtonClick}>
-        {user ? "Logout" : "Login"}
-      </Button>
+      {user ? (
+        <div className="flex gap-4">
+          <Button link to="/movies" className="p-2! mx-auto my-auto">
+            <Home className="size-[22px]" />
+          </Button>
+          <Button
+            link
+            to="/login"
+            className="p-2! mx-auto my-auto"
+            onClick={logout}
+          >
+            <Logout className="size-[22px]" />
+          </Button>
+        </div>
+      ) : (
+        <Button link to="/login">
+          Login
+        </Button>
+      )}
     </header>
   );
 }
