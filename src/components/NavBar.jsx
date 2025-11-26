@@ -21,7 +21,11 @@ function NavBar() {
         </div>
         {user ? (
           <div className="flex gap-4">
-            <Button link to="/movies" className="p-2! mx-auto my-auto">
+            <Button
+              link
+              to="/movies"
+              className="p-2! mx-auto my-auto hover:bg-white/80"
+            >
               <Home className="size-[22px]" />
             </Button>
             <Button
