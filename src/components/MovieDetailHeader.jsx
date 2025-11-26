@@ -11,7 +11,7 @@ function MovieDetailHeader({ name, genre, year, rating }) {
         </h2>
       </div>
 
-      <div className="flex">
+      <div className="flex relative z-20">
         {new Array(rating ? 5 : 0)
           .fill(null)
           .map((_, index) =>
@@ -27,6 +27,8 @@ function MovieDetailHeader({ name, genre, year, rating }) {
             <span>Not Watched</span>
           </div>
         )}
+
+        <div className="bg-yellow absolute size-[156px] rounded-full -z-10 blur-2xl opacity-4 top-1/2 right-0 -translate-y-1/2 translate-x-1/4" />
       </div>
     </div>
   );
