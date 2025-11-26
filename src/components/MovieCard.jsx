@@ -3,10 +3,10 @@ import StarOutline from "@assets/icons/starOutline.svg?react";
 
 function MovieCard({ id, name, rating, img }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <a
         href={`movies/${id}`}
-        className="transition-transform duration-300 ease-out transform hover:scale-105"
+        className="transition-transform duration-300 ease-out transform hover:scale-105 mb-2"
       >
         <img
           src={img}
