@@ -8,7 +8,7 @@ function MovieList({ movies, name, isMain = false }) {
   const [sectionHidden, hideSection] = useState(false);
 
   return (
-    <div className="flex flex-col gap-12 mt-6">
+    <div className="flex flex-col gap-10 mt-6 mb-12">
       <div className="flex justify-between items-center text-white font-heading font-bold text-2xl">
         <button
           className="cursor-pointer flex gap-4 items-center"
