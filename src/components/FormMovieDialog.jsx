@@ -29,7 +29,7 @@ function ConfirmationDialog({
     severity: "success",
   });
   const dispatch = useDispatch();
-  const { addMovie: newMovie, updateMovie } = moviesSlice.actions;
+  const { addMovie: newMovie } = moviesSlice.actions;
 
   const handleSubmit = async (values, { resetForm }) => {
     await addMovie(values, resetForm);

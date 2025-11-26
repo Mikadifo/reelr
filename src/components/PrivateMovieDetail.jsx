@@ -1,4 +1,6 @@
 import Button from "@components/Button";
+import api from "./../axiosConfig";
+import Alert from "@components/Alert";
 import FormMovieDialog from "./FormMovieDialog";
 import Edit from "@assets/icons/edit.svg?react";
 import Share from "@assets/icons/share.svg?react";
@@ -6,12 +8,55 @@ import Delete from "@assets/icons/delete.svg?react";
 import Add from "@assets/icons/add.svg?react";
 import Remove from "@assets/icons/cross.svg?react";
 import MovieDetailHeader from "./MovieDetailHeader";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import DeleteMovieDialog from "./DeleteMovieDialog";
+import SharePrivateMovieDialog from "./SharePrivateMovieDialog";
 
 function PrivateMovieDetail({ movie, setMovie }) {
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
   const formDialogRef = useRef(null);
   const deleteDialogRef = useRef(null);
+  const shareDialogRef = useRef(null);
+
+  const handleShare = () => {
+    if (movie.public) {
+      share();
+    } else {
+      openShareDialog();
+    }
+  };
+
+  const share = async () => {
+    try {
+      const res = await api.get(`/share/${movie.id}`);
+
+      setAlert({
+        open: true,
+        message: "Share URL copied to clipboard",
+        severity: "success",
+      });
+
+      navigator.clipboard.writeText(window.location.origin + res.data);
+    } catch (error) {
+      const response = error.response;
+
+      setAlert({
+        open: true,
+        message: response.data.error || "Something went wrong",
+        severity: "error",
+      });
+    }
+  };
+
+  const openShareDialog = () => {
+    if (shareDialogRef.current) {
+      shareDialogRef.current.showModal();
+    }
+  };
 
   const openFormDialog = () => {
     if (formDialogRef.current) {
@@ -82,7 +127,7 @@ function PrivateMovieDetail({ movie, setMovie }) {
             Edit
             <Edit className="size-[22px]" />
           </Button>
-          <Button className="flex gap-2 size-fit">
+          <Button className="flex gap-2 size-fit" onClick={handleShare}>
             Share
             <Share className="size-[22px]" />
           </Button>
@@ -103,6 +148,14 @@ function PrivateMovieDetail({ movie, setMovie }) {
         isPublic={movie.public}
       />
       <DeleteMovieDialog dialogRef={deleteDialogRef} {...movie} />
+      <SharePrivateMovieDialog
+        dialogRef={shareDialogRef}
+        movie={movie}
+        setMovie={setMovie}
+        handleShare={share}
+      />
+
+      <Alert alert={alert} setAlert={setAlert} />
     </section>
   );
 }
