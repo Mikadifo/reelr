@@ -39,7 +39,7 @@ function MoviesPage() {
 
   return (
     <div>
-      <MovieList movies={movieList} />
+      <MovieList movies={movieList} name={"Your movies"} isMain />
       <Alert alert={alert} setAlert={setAlert} />
     </div>
   );
