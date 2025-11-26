@@ -1,6 +1,13 @@
 import CloseIcon from "@assets/icons/cross.svg?react";
+import { useEffect } from "react";
 
 function Alert({ alert, setAlert }) {
+  useEffect(() => {
+    if (alert.open) {
+      setTimeout(() => setAlert({ ...alert, open: false }), 3000);
+    }
+  }, [alert, setAlert]);
+
   return (
     <div
       className={`${alert.severity === "error" ? "bg-red text-white" : "bg-green text-dark"} font-body px-6 py-3 rounded-2xl whitespace-nowrap absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-40`}
