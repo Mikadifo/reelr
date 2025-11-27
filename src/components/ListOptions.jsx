@@ -1,11 +1,13 @@
 import Menu from "@assets/icons/menu.svg?react";
 import FormListDialog from "@components/FormListDialog";
+import DeleteListDialog from "@components/DeleteListDialog";
 import { useEffect, useRef, useState } from "react";
 
 function ListOptions({ listId, name }) {
   const [optionsOpen, setOpenOptions] = useState(false);
   const optionsRef = useRef(null);
   const formDialogRef = useRef(null);
+  const deleteDialogRef = useRef(null);
 
   useEffect(() => {
     const ref = optionsRef.current;
@@ -33,6 +35,12 @@ function ListOptions({ listId, name }) {
     }
   };
 
+  const openDeleteDialog = () => {
+    if (deleteDialogRef.current) {
+      deleteDialogRef.current.showModal();
+    }
+  };
+
   return (
     <div className="flex flex-col relative text-white font-body font-normal">
       <button className="cursor-pointer" onClick={() => setOpenOptions(true)}>
@@ -54,13 +62,14 @@ function ListOptions({ listId, name }) {
         <button
           type="button"
           className="cursor-pointer hover:opacity-85 hover:bg-dark-accent/30 px-4 py-2 border-b border-b-white/4 text-nowrap text-left"
-          onClick={() => addToList(3)}
+          onClick={openDeleteDialog}
         >
           Delete List
         </button>
       </div>
 
       <FormListDialog dialogRef={formDialogRef} id={listId} name={name} />
+      <DeleteListDialog dialogRef={deleteDialogRef} id={listId} name={name} />
     </div>
   );
 }

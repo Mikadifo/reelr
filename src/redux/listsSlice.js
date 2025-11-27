@@ -33,6 +33,9 @@ export const listsSlice = createSlice({
         list.id === action.payload.id ? action.payload : list,
       );
     },
+    deleteList: function (state, action) {
+      return state.filter((list) => list.id !== action.payload);
+    },
     addMovieToList: function (state, action) {
       const { listId, movie } = action.payload;
 
