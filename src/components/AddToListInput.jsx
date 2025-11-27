@@ -108,7 +108,9 @@ function AddToListInput({ movie, setAlert = () => {}, setMovie }) {
           </button>
         ))}
 
-        {lists.length === 0 && <span className="px-4">No lists available</span>}
+        {lists.length === 0 && (
+          <span className="px-4 text-nowrap">No lists available</span>
+        )}
       </div>
     </div>
   );

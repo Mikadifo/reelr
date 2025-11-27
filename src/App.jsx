@@ -7,6 +7,7 @@ import MainLayout from "./layouts/MainLayout";
 import MoviesPage from "@pages/MoviesPage";
 import PrivateMovieDetailPage from "@pages/PrivateMovieDetailPage";
 import PublicMovieDetailPage from "@pages/PublicMovieDetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           element={<PublicMovieDetailPage />}
         />
         <Route path="/movies/:id" element={<PrivateMovieDetailPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
