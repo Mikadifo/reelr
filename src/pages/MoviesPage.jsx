@@ -3,6 +3,7 @@ import Alert from "@components/Alert";
 import { listsSlice } from "@redux/listsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieList from "@components/MovieList";
+import MovieListSkeleton from "@components/MovieListSkeleton";
 import api from "./../axiosConfig";
 
 function MoviesPage() {
@@ -11,14 +12,19 @@ function MoviesPage() {
     message: "",
     severity: "success",
   });
+  const [loading, setLoading] = useState(false);
   const lists = useSelector((state) => state.lists);
   const dispatch = useDispatch();
   const { setLists, addList } = listsSlice.actions;
 
   useEffect(() => {
     const fetch = async () => {
+      setLoading(true);
+
       await getLists();
       await getUnlistedMovies();
+
+      setLoading(false);
     };
 
     fetch();
@@ -68,6 +74,8 @@ function MoviesPage() {
 
   return (
     <div>
+      {loading && <MovieListSkeleton />}
+
       {lists.map((list) => (
         <MovieList {...list} key={list.id} />
       ))}
