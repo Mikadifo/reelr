@@ -1,3 +1,5 @@
+<img width="1500" height="500" alt="banner" src="https://github.com/user-attachments/assets/27e49131-0df8-40a5-9ced-a62465b1a07d" />
+
 # Reelr
 
 Reelr is a web app that helps you keep track of movies you love and would watch again, movies that you want to watch or movies that you didn’t like as much. You’ll be able to rate movies from 1 to 5, create custom lists, and even publicly share your lists/movies with friends.
