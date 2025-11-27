@@ -70,6 +70,29 @@ function PrivateMovieDetail({ movie, setMovie }) {
     }
   };
 
+  const removeFromList = async (listId) => {
+    const movieBeforeDeletion = movie;
+
+    setMovie({
+      ...movie,
+      lists: movie.lists.filter((list) => list.id !== listId),
+    });
+
+    try {
+      await api.delete(`/lists/${listId}/${movie.id}`);
+    } catch (error) {
+      const response = error.response;
+
+      setAlert({
+        open: true,
+        message: response.data.error || "Something went wrong",
+        severity: "error",
+      });
+
+      setMovie(movieBeforeDeletion);
+    }
+  };
+
   return (
     <section className="flex gap-16 font-body justify-center mt-24">
       <img
@@ -95,7 +118,10 @@ function PrivateMovieDetail({ movie, setMovie }) {
                   className="text-base px-6 py-2 bg-dark-06 rounded-full flex gap-2.5 w-fit items-center"
                 >
                   {list.name}
-                  <button>
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => removeFromList(list.id)}
+                  >
                     <Remove className="size-[19px]" />
                   </button>
                 </span>
