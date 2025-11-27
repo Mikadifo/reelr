@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import Arrow from "@assets/icons/arrow.svg?react";
 import Menu from "@assets/icons/menu.svg?react";
 
-function MovieList({ movies, name, unlisted = false }) {
+function MovieList({ id, movies, name, unlisted = false }) {
   const [sectionHidden, hideSection] = useState(false);
 
   return (
@@ -29,7 +29,7 @@ function MovieList({ movies, name, unlisted = false }) {
       </div>
 
       <div className="flex flex-wrap gap-9" hidden={sectionHidden}>
-        <AddMovieButton />
+        <AddMovieButton listId={id} />
 
         {movies.length > 0 &&
           movies.map((movie) => <MovieCard key={movie.id} {...movie} />)}

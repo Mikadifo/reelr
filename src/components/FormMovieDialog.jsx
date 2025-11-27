@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 function FormMovieDialog({
   dialogRef,
   open = false,
+  listId = null,
   id = null,
   name = "",
   genre = "",
@@ -41,6 +42,8 @@ function FormMovieDialog({
 
       if (id) {
         res = await api.put(`/movies/${id}`, movie);
+      } else if (listId && listId > 0) {
+        res = await api.post(`/movies/${listId}`, movie);
       } else {
         res = await api.post("/movies", movie);
       }
@@ -52,7 +55,7 @@ function FormMovieDialog({
       });
 
       if (!id) {
-        dispatch(addMovieToList(res.data));
+        dispatch(addMovieToList({ movie: res.data, listId }));
       }
 
       setMovie(res.data);

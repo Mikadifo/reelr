@@ -2,7 +2,7 @@ import { useRef } from "react";
 import FormMovieDialog from "./FormMovieDialog";
 import Add from "@assets/icons/add.svg?react";
 
-function AddMovieButton() {
+function AddMovieButton({ listId = null }) {
   const dialogRef = useRef(null);
 
   const openDialog = () => {
@@ -25,7 +25,7 @@ function AddMovieButton() {
         <p className="text-white font-heading text-lg font-bold">Add Movie</p>
       </div>
 
-      <FormMovieDialog dialogRef={dialogRef} />
+      <FormMovieDialog dialogRef={dialogRef} listId={listId} />
     </>
   );
 }

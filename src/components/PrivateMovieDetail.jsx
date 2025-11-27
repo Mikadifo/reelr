@@ -90,7 +90,10 @@ function PrivateMovieDetail({ movie, setMovie }) {
                 This movie is in
               </h3>
               {movie.lists.map((list) => (
-                <span className="text-base px-6 py-2 bg-dark-06 rounded-full flex gap-2.5 w-fit items-center">
+                <span
+                  key={list.id}
+                  className="text-base px-6 py-2 bg-dark-06 rounded-full flex gap-2.5 w-fit items-center"
+                >
                   {list.name}
                   <button>
                     <Remove className="size-[19px]" />
