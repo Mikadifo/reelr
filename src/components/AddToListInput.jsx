@@ -8,8 +8,10 @@ function AddToListInput({ movie, setAlert = () => {}, setMovie }) {
   const optionsRef = useRef(null);
 
   useEffect(() => {
-    fetchLists();
-  }, []);
+    if (optionsOpen) {
+      fetchLists();
+    }
+  }, [optionsOpen]);
 
   useEffect(() => {
     const ref = optionsRef.current;
@@ -106,7 +108,7 @@ function AddToListInput({ movie, setAlert = () => {}, setMovie }) {
           </button>
         ))}
 
-        {lists.length === 0 && <span>No lists created yet</span>}
+        {lists.length === 0 && <span className="px-4">No lists available</span>}
       </div>
     </div>
   );
